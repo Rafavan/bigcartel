@@ -1,3 +1,4 @@
+<script>
 const track = document.querySelector(".carousel-track");
 const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
@@ -21,3 +22,4 @@ prevBtn.addEventListener("click", () => {
     track.style.transform = `translateX(-${index * 100}%)`;
   }
 });
+</script>
