@@ -1,29 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const slideContainer = document.querySelector(".carousel-slide");
-  const slides = document.querySelectorAll(".carousel-image");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
+const track = document.querySelector(".carousel-track");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
 
-  let currentIndex = 0;
+let index = 0;
 
-  function showSlide(index) {
-    const slideWidth = slides[0].clientWidth;
-    slideContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+nextBtn.addEventListener("click", () => {
+  const itemsPerView = window.innerWidth <= 768 ? 2 : 4;
+  const totalItems = track.children.length;
+  const maxIndex = Math.ceil(totalItems / itemsPerView) - 1;
+
+  if (index < maxIndex) {
+    index++;
+    track.style.transform = `translateX(-${index * 100}%)`;
   }
+});
 
-  nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  });
-
-  prevBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    showSlide(currentIndex);
-  });
-
-  // Opcional: avance automático cada 5 segundos
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  }, 5000);
+prevBtn.addEventListener("click", () => {
+  if (index > 0) {
+    index--;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
 });
